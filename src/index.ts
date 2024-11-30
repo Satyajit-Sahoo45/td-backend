@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8000;
 app.use(
   cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
-    origin: ["http://localhost:3000", "https://td-backend.onrender.com"],
+    origin: ["https://td-backend.onrender.com"],
   })
 );
 app.use(express.json());
