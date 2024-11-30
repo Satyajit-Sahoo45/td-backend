@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "watch": "tsc -w",
+    "build": "tsc -b",
     "server": "nodemon dist/index.js",
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:studio": "npx prisma studio"
