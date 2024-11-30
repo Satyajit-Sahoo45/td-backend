@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8000;
 app.use(
   cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
-    origin: ["https://td-frontend-teal.vercel.app/"],
+    origin: ["https://td-frontend-teal.vercel.app"],
   })
 );
 app.use(express.json());
