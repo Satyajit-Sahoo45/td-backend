@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(cuid())
+  email    String   @unique
+  name     String
+  password String
+  role     Role   @default(USER)
+  loans    Loan[]
+}
+
+model Loan {
+  id                  String             @id @default(cuid())
+  amount              Float
+  term                Int
+  LoanStatus          LoanStatus         @default(PENDING)
+  userId              String
+  user                User               @relation(fields: [userId], references: [id])
+  scheduledRepayments ScheduledRepayment[]
+}
+
+model ScheduledRepayment {
+  id                        Int     @id @default(autoincrement())
+  amount                    Float
+  date                      DateTime
+  ScheduledRepaymentStatus  ScheduledRepaymentStatus  @default(PENDING)
+  loanId                    String
+  loan                      Loan    @relation(fields: [loanId], references: [id])
+}
+
+enum ScheduledRepaymentStatus {
+  PENDING
+  APPROVED
+  PAID
+}
+
+enum LoanStatus {
+  PENDING
+  APPROVED
+  PAID
+}
+
+enum Role {
+  USER
+  ADMIN
+}
